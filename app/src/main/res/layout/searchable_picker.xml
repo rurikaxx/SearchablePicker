@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <EditText
+        android:id="@+id/query"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="請輸入搜尋文字"
+        android:textColorHint="#ffffff"
+        android:background="#3e4043"
+        android:textColor="#ffffff"
+        />
+
+    <www.manycat.net.searchablepicker.CycleWheelView
+        android:id="@+id/picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </www.manycat.net.searchablepicker.CycleWheelView>
+
+</LinearLayout>
