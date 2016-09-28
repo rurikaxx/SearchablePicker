@@ -10,17 +10,17 @@
     android:orientation="vertical"
     tools:context="www.manycat.net.searchablepicker.MainActivity">
 
-    <Button
-        android:id="@+id/btn"
-        android:text="送出"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <www.manycat.net.searchablepicker.SearchablePicker
         android:id="@+id/searchable_picker"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
     </www.manycat.net.searchablepicker.SearchablePicker>
+
+    <Button
+        android:id="@+id/btn"
+        android:text="Dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

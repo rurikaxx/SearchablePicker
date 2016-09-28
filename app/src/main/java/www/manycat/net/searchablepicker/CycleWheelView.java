@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -544,18 +545,43 @@ public class CycleWheelView extends ListView {
                 convertView.setVisibility(View.VISIBLE);
             }
 
-            final int p = position;
+            Log.i("David", "Bind onClick Event" + position);
 
-            convertView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mItemClickListener != null) {
-                        mItemClickListener.onItemClick( p-2, mData.get(p-2));
-                    }
-                }
-            });
+            convertView.setOnClickListener(new ItemOnClickListener( position, mData));
+
+//            final int p = position;
+//
+//            convertView.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (mItemClickListener != null) {
+//                        mItemClickListener.onItemClick( p - (mWheelSize / 2), mData.get( p - (mWheelSize / 2)));
+//                    }
+//                }
+//            });
 
             return convertView;
         }
     }
+
+    class ItemOnClickListener implements OnClickListener
+    {
+        private int position;
+        private List<String> mData = new ArrayList<String>();
+
+        public ItemOnClickListener(int position, List<String> mData)
+        {
+            this.position = position;
+            this.mData = mData;
+        }
+
+        @Override
+        public void onClick(View view)
+        {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick( position - (mWheelSize / 2), mData.get( position - (mWheelSize / 2)));
+            }
+        }
+    }
+
 }

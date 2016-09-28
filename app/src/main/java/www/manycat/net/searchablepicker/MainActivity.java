@@ -8,11 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+        SearchablePicker.OnPickerItemSelectedListener, SearchablePicker.OnPickerItemClickListener {
 
     private Button btn;
     private CycleWheelView picker;
@@ -53,27 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         searchable_picker.setLabels(labels);
         searchable_picker.setWheelSize(3);
-        searchable_picker.setOnPickerItemSelectedListener(new SearchablePicker.OnPickerItemSelectedListener() {
-            @Override
-            public void onPickerItemSelected(int position, String label) {
-                Log.i( "David", " label == " + label);
-            }
-        });
-
-        searchable_picker.setOnPickerItemClickListener(new SearchablePicker.OnPickerItemClickListener() {
-            @Override
-            public void onPickerItemClick(int position, String label) {
-                Log.i( "David", " label == " + label);
-            }
-        });
-
-        searchable_picker.setPickerLabelColor(Color.parseColor("#ff0000"));
-        searchable_picker.setPickerLabelSelectColor(Color.parseColor("#ff00ff"));
-        searchable_picker.setPickerSolid( Color.parseColor("#aaaaaa"), Color.parseColor("#00ff00"));
-        searchable_picker.setSearchbarTextColor(Color.parseColor("#aaaaaa"));
-        searchable_picker.setSearchbarBackgroundColor(Color.parseColor("#00ff00"));
-        searchable_picker.setSearchbarHintText("預設文字");
-        searchable_picker.setSearchbarHintTextColor(Color.parseColor("#000000"));
+        searchable_picker.setOnPickerItemSelectedListener(this);
+        searchable_picker.setOnPickerItemClickListener(this);
 
 
         btn.setOnClickListener(this);
@@ -102,6 +85,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             searchablePicker2.setLabels(labels2);
             searchablePicker2.setWheelSize(5);
+            searchablePicker2.setPickerLabelColor(Color.parseColor("#ff0000"));
+            searchablePicker2.setPickerLabelSelectColor(Color.parseColor("#ff00ff"));
+            searchablePicker2.setPickerSolid( Color.parseColor("#aaaaaa"), Color.parseColor("#00ff00"));
+            searchablePicker2.setSearchbarTextColor(Color.parseColor("#aaaaaa"));
+            searchablePicker2.setSearchbarBackgroundColor(Color.parseColor("#00ff00"));
+            searchablePicker2.setSearchbarHintText("預設文字");
+            searchablePicker2.setSearchbarHintTextColor(Color.parseColor("#000000"));
+            searchablePicker2.setOnPickerItemSelectedListener(this);
+            searchablePicker2.setOnPickerItemClickListener(this);
 
             dialig = new AlertDialog.Builder(MainActivity.this)
                     .setView(searchablePicker2)
@@ -111,5 +103,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             dialig.show();
         }
+    }
+
+    @Override
+    public void onPickerItemClick(int position, String label) {
+        Toast.makeText( this, "你點擊了" + label, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPickerItemSelected(int position, String label) {
+        Log.i( "test", " Picker選中了 == " + label);
     }
 }
