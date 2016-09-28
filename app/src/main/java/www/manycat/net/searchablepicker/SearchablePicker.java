@@ -122,6 +122,18 @@ public class SearchablePicker extends LinearLayout implements CycleWheelView.Whe
         picker.setDivider( dividerColor, dividerHeight);
     }
 
+    // 設定搜尋框文字顏色
+    public void setSearchbarTextColor(int SearchbarTextColor)
+    {
+        query.setTextColor(SearchbarTextColor);
+    }
+
+    // 設定搜尋框背景顏色
+    public void setSearchbarBackgroundColor(int SearchbarBackgroundColor)
+    {
+        query.setBackgroundColor(SearchbarBackgroundColor);
+    }
+
     private void init()
     {
         LayoutInflater inflater = LayoutInflater.from(context);

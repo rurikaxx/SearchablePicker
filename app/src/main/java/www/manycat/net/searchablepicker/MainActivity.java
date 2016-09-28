@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchable_picker.setPickerLabelColor(Color.parseColor("#ff0000"));
         searchable_picker.setPickerLabelSelectColor(Color.parseColor("#ff00ff"));
         searchable_picker.setPickerSolid( Color.parseColor("#aaaaaa"), Color.parseColor("#00ff00"));
+        searchable_picker.setSearchbarTextColor(Color.parseColor("#aaaaaa"));
+        searchable_picker.setSearchbarBackgroundColor(Color.parseColor("#00ff00"));
 
         buildSearchablePicker();
 
