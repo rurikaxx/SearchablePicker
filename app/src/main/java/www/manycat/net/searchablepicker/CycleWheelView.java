@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,32 +145,19 @@ public class CycleWheelView extends ListView {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                if (scrollState == SCROLL_STATE_IDLE) {
-
-//                    Log.i( "David", " scrollState " + scrollState);
-
+                if (scrollState == SCROLL_STATE_IDLE)
+                {
                     View itemView = getChildAt(0);
                     if (itemView != null) {
                         float deltaY = itemView.getY();
                         if (deltaY == 0) {
                             return;
                         }
-
-                        Log.i( "David",
-                                " scrollState " + (mItemHeight / 2) +
-                                " itemView.getTop" + itemView.getTop() +
-                                " deltaY" + deltaY +
-
-                                ""
-                        );
-
                         if (Math.abs(deltaY) < mItemHeight / 2) {
-                            Log.i( "David", " debug line 1 ");
                             scrollBy(0, -Math.abs(itemView.getTop()));
 //                            smoothScrollBy(getDistance(deltaY), 50);
 //                            smoothScrollToPositionFromTop( getSelection(), 0, 10);
                         } else {
-                            Log.i( "David", " debug line 2 ");
                             scrollBy(0, mItemHeight - Math.abs(itemView.getTop()));
 //                            smoothScrollBy(getDistance(mItemHeight + deltaY), 50);
 //                            smoothScrollToPositionFromTop( getSelection(), 0, 10);
@@ -560,7 +546,6 @@ public class CycleWheelView extends ListView {
                 public void onClick(View v) {
                     if (mItemClickListener != null) {
                         mItemClickListener.onItemClick( p-2, mData.get(p-2));
-//                        setSelection(p-2);
                     }
                 }
             });

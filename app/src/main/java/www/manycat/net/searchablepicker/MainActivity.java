@@ -1,6 +1,7 @@
 package www.manycat.net.searchablepicker;
 
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<String> labels, tmpLabels;
     private View searchablePicker;
     private AlertDialog dialig;
+    private SearchablePicker searchable_picker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         btn = (Button)findViewById(R.id.btn);
+
+        searchable_picker = (SearchablePicker)findViewById(R.id.searchable_picker);
+
+        labels = new ArrayList<>();
+        labels.add("師速列車12");
+        labels.add("美國隊長");
+        labels.add("豬羅機工原");
+        labels.add("鬼來電");
+        labels.add("麗英宅");
+        labels.add("特力屋");
+        labels.add("復仇者聯盟");
+        labels.add("次機1995");
+        labels.add("1995");
+        labels.add("動物方程式");
+
+        searchable_picker.setLabels(labels);
+        searchable_picker.setWheelSize(5);
+        searchable_picker.setOnPickerItemSelectedListener(new SearchablePicker.OnPickerItemSelectedListener() {
+            @Override
+            public void onPickerItemSelected(int position, String label) {
+                Log.i( "David", " label == " + label);
+            }
+        });
+
+        searchable_picker.setOnPickerItemClickListener(new SearchablePicker.OnPickerItemClickListener() {
+            @Override
+            public void onPickerItemClick(int position, String label) {
+                Log.i( "David", " label == " + label);
+            }
+        });
+
+        searchable_picker.setPickerLabelColor(Color.parseColor("#ff0000"));
+        searchable_picker.setPickerLabelSelectColor(Color.parseColor("#ff00ff"));
+        searchable_picker.setPickerSolid( Color.parseColor("#aaaaaa"), Color.parseColor("#00ff00"));
 
         buildSearchablePicker();
 
@@ -122,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
+        searchable_picker.setLabels(labels);
 
         if( dialig == null )
         {
