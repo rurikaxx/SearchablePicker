@@ -134,16 +134,31 @@ public class SearchablePicker extends LinearLayout implements CycleWheelView.Whe
         query.setBackgroundColor(SearchbarBackgroundColor);
     }
 
+    // 設定搜尋框hint文字
+    public void setSearchbarHintText(String hint)
+    {
+        query.setHint(hint);
+    }
+
+    // 設定搜尋框hint文字
+    public void setSearchbarHintTextColor(int SearchbarHintColor)
+    {
+        query.setHintTextColor(SearchbarHintColor);
+    }
+
     private void init()
     {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         searchablePicker = inflater.inflate(R.layout.searchable_picker, this, true);
+
+        // Picker
         picker = (CycleWheelView)searchablePicker.findViewById(R.id.picker);
         picker.setAlphaGradual(0.5f);
         picker.setOnWheelItemSelectedListener(this);
         picker.setOnWheelItemClickListener(this);
 
+        // SearchBar
         query = (EditText) searchablePicker.findViewById(R.id.query);
         query.addTextChangedListener(this);
     }

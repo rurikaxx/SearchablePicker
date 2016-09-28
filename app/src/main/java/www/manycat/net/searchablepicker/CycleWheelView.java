@@ -256,6 +256,11 @@ public class CycleWheelView extends ListView {
         this.mItemSelectedListener = mItemSelectedListener;
     }
 
+    /**
+     * 设置滚轮滚动监听
+     *
+     * @param mItemClickListener
+     */
     public void setOnWheelItemClickListener(WheelItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
