@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CycleWheelView picker;
     private EditText query;
     private List<String> labels, tmpLabels;
+    private View searchablePicker;
+    private AlertDialog dialig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +30,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btn = (Button)findViewById(R.id.btn);
 
+        buildSearchablePicker();
+
         btn.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
+    private void buildSearchablePicker()
+    {
         LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
 
-        final View searchablePicker = inflater.inflate(R.layout.searchable_picker, null);
+        searchablePicker = inflater.inflate(R.layout.searchable_picker, null);
 
         labels = new ArrayList<>();
         labels.add("師速列車");
@@ -67,10 +71,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        picker.setOnClickListener(new View.OnClickListener() {
+        picker.setOnWheelItemClickListener(new CycleWheelView.WheelItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(int position, String label) {
+                Log.d("test", label);
+            }
+        });
 
+        picker.setOnWheelItemClickListener(new CycleWheelView.WheelItemClickListener() {
+            @Override
+            public void onItemClick(int position, String label) {
+                dialig.hide();
             }
         });
 
@@ -99,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     tmpLabels = labels;
                 }
-
                 picker.setLabels(tmpLabels);
             }
 
@@ -108,19 +118,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+    }
 
-        new AlertDialog.Builder(MainActivity.this)
-//        .setTitle("請輸入你的id")
-        .setView(searchablePicker)
-//        .setPositiveButton("確定", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-////                EditText editText = (EditText) (v.findViewById(R.id.editText1));
-////                Toast.makeText(getApplicationContext(), "你的id是" +
-////
-////                        editText.getText().toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        })
-        .show();
+    @Override
+    public void onClick(View v) {
+
+        if( dialig == null )
+        {
+            dialig = new AlertDialog.Builder(MainActivity.this)
+                    .setView(searchablePicker)
+                    .show();
+        }
+        else
+        {
+            dialig.show();
+        }
     }
 }
