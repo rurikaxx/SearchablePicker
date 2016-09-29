@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         labels.add("惡靈古堡5");
 
         searchable_picker.setLabels(labels);
-        searchable_picker.setWheelSize(3);
+        searchable_picker.setWheelSize(5);
         searchable_picker.setOnPickerItemSelectedListener(this);
         searchable_picker.setOnPickerItemClickListener(this);
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             labels2.add("特種部隊2");
 
             searchablePicker2.setLabels(labels2);
-            searchablePicker2.setWheelSize(5);
+            searchablePicker2.setWheelSize(3);
             searchablePicker2.setPickerLabelColor(Color.parseColor("#ff0000"));
             searchablePicker2.setPickerLabelSelectColor(Color.parseColor("#ff00ff"));
             searchablePicker2.setPickerSolid( Color.parseColor("#aaaaaa"), Color.parseColor("#00ff00"));
