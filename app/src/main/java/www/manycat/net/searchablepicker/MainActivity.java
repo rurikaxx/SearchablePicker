@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,10 +16,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SearchablePicker.OnPickerItemSelectedListener, SearchablePicker.OnPickerItemClickListener {
 
     private Button btn;
-    private CycleWheelView picker;
-    private EditText query;
-    private List<String> labels, tmpLabels;
-    private View searchablePicker;
     private AlertDialog dialig;
     private SearchablePicker searchable_picker;
     private SearchablePicker searchablePicker2;
@@ -35,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         searchable_picker = (SearchablePicker)findViewById(R.id.searchable_picker);
 
-        labels = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
         labels.add("屍速列車");
         labels.add("美國隊長");
         labels.add("美國隊長2");
