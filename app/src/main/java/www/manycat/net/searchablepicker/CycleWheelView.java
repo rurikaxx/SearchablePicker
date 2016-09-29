@@ -108,6 +108,8 @@ public class CycleWheelView extends ListView {
 
     private Context context;
 
+    private int last_position;
+
     /**缩小动画**/
     Animation zoomOut = null;
 
@@ -158,11 +160,11 @@ public class CycleWheelView extends ListView {
                         if (Math.abs(deltaY) < mItemHeight / 2) {
 //                            scrollBy(0, -Math.abs(itemView.getTop()));// 尼瑪用scrollBy,onClick Event不會觸發臥槽
 //                            smoothScrollBy(getDistance(deltaY), 50);  // 緩衝滑動,實機測試會失效(實機在smoothScrollBy結束後,不再執行onScrollStateChanged)
-                            smoothScrollBy( - Math.abs(itemView.getTop()), 1000);
+                            smoothScrollBy( - Math.abs(itemView.getTop()), 50);
                         } else {
 //                            scrollBy(0, mItemHeight - Math.abs(itemView.getTop()));// 尼瑪用scrollBy,onClick Event不會觸發臥槽
 //                            smoothScrollBy(getDistance(mItemHeight + deltaY), 50);// 緩衝滑動,實機測試會失效(實機在smoothScrollBy結束後,不再執行onScrollStateChanged)
-                            smoothScrollBy( mItemHeight - Math.abs(itemView.getTop()), 1000);
+                            smoothScrollBy( mItemHeight - Math.abs(itemView.getTop()), 50);
                         }
                     }
                 }
@@ -225,16 +227,26 @@ public class CycleWheelView extends ListView {
                 labelTv.startAnimation(zoomIn);
                 itemView.setAlpha(1f);
             } else {
+
                 labelTv.setTextColor(mLabelColor);
-                if( position-1 == i || position+1 == i )
+
+                // 縮小動畫處理
+                if( last_position - position > 0 && position+1 == i)
                 {
                     labelTv.startAnimation(zoomOut);
                 }
+                else if( last_position - position < 0 && position-1 == i)
+                {
+                    labelTv.startAnimation(zoomOut);
+                }
+
                 int delta = Math.abs(i - position);
                 double alpha = Math.pow(mAlphaGradual, delta);
                 itemView.setAlpha((float) alpha);
             }
         }
+
+        last_position = position;
     }
 
     /**
