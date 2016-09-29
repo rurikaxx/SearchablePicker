@@ -150,18 +150,19 @@ public class CycleWheelView extends ListView {
                 {
                     View itemView = getChildAt(0);
                     if (itemView != null) {
+
                         float deltaY = itemView.getY();
                         if (deltaY == 0) {
                             return;
                         }
                         if (Math.abs(deltaY) < mItemHeight / 2) {
-                            scrollBy(0, -Math.abs(itemView.getTop()));
-//                            smoothScrollBy(getDistance(deltaY), 50);
-//                            smoothScrollToPositionFromTop( getSelection(), 0, 10);
+//                            scrollBy(0, -Math.abs(itemView.getTop()));// 尼瑪用scrollBy,onClick Event不會觸發臥槽
+//                            smoothScrollBy(getDistance(deltaY), 50);  // 緩衝滑動,實機測試會失效(實機在smoothScrollBy結束後,不再執行onScrollStateChanged)
+                            smoothScrollBy( - Math.abs(itemView.getTop()), 1000);
                         } else {
-                            scrollBy(0, mItemHeight - Math.abs(itemView.getTop()));
-//                            smoothScrollBy(getDistance(mItemHeight + deltaY), 50);
-//                            smoothScrollToPositionFromTop( getSelection(), 0, 10);
+//                            scrollBy(0, mItemHeight - Math.abs(itemView.getTop()));// 尼瑪用scrollBy,onClick Event不會觸發臥槽
+//                            smoothScrollBy(getDistance(mItemHeight + deltaY), 50);// 緩衝滑動,實機測試會失效(實機在smoothScrollBy結束後,不再執行onScrollStateChanged)
+                            smoothScrollBy( mItemHeight - Math.abs(itemView.getTop()), 1000);
                         }
                     }
                 }
@@ -545,20 +546,7 @@ public class CycleWheelView extends ListView {
                 convertView.setVisibility(View.VISIBLE);
             }
 
-            Log.i("David", "Bind onClick Event" + position);
-
             convertView.setOnClickListener(new ItemOnClickListener( position, mData));
-
-//            final int p = position;
-//
-//            convertView.setOnClickListener(new OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (mItemClickListener != null) {
-//                        mItemClickListener.onItemClick( p - (mWheelSize / 2), mData.get( p - (mWheelSize / 2)));
-//                    }
-//                }
-//            });
 
             return convertView;
         }
