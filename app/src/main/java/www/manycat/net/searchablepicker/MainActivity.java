@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         SearchablePicker.OnPickerItemSelectedListener, SearchablePicker.OnPickerItemClickListener {
 
+    private TextView selected_label;
     private Button btn;
     private AlertDialog dialig;
     private SearchablePicker searchable_picker;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         btn = (Button)findViewById(R.id.btn);
+
+        selected_label = (TextView)findViewById(R.id.selected_label);
 
         searchable_picker = (SearchablePicker)findViewById(R.id.searchable_picker);
 
@@ -107,6 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onPickerItemSelected(int position, String label) {
-        Log.i( "test", " Picker選中了 == " + label);
+        selected_label.setText("你選中了" + label);
     }
 }

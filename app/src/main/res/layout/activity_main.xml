@@ -16,6 +16,12 @@
         android:layout_height="wrap_content">
 
     </www.manycat.net.searchablepicker.SearchablePicker>
+    <TextView
+        android:id="@+id/selected_label"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btn"
