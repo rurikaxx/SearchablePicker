@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         labels.add("屍速列車");
         labels.add("美國隊長");
         labels.add("美國隊長2");
+        labels.add("美麗境界");
+        labels.add("美滿人生");
+        labels.add("人美心更美");
         labels.add("美國隊長3");
         labels.add("鬼來電");
         labels.add("厲陰宅");
