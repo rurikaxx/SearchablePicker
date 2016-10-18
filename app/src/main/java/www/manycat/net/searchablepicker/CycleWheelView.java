@@ -6,9 +6,9 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -158,13 +158,9 @@ public class CycleWheelView extends ListView {
                             return;
                         }
                         if (Math.abs(deltaY) < mItemHeight / 2) {
-//                            scrollBy(0, -Math.abs(itemView.getTop()));// 尼瑪用scrollBy,onClick Event不會觸發臥槽
-//                            smoothScrollBy(getDistance(deltaY), 50);  // 緩衝滑動,實機測試會失效(實機在smoothScrollBy結束後,不再執行onScrollStateChanged)
-                            smoothScrollBy( - Math.abs(itemView.getTop()), 50);
+                            bufferScrollByAPIVersion( - Math.abs(itemView.getTop()));
                         } else {
-//                            scrollBy(0, mItemHeight - Math.abs(itemView.getTop()));// 尼瑪用scrollBy,onClick Event不會觸發臥槽
-//                            smoothScrollBy(getDistance(mItemHeight + deltaY), 50);// 緩衝滑動,實機測試會失效(實機在smoothScrollBy結束後,不再執行onScrollStateChanged)
-                            smoothScrollBy( mItemHeight - Math.abs(itemView.getTop()), 50);
+                            bufferScrollByAPIVersion( mItemHeight - Math.abs(itemView.getTop()) );
                         }
                     }
                 }
@@ -176,6 +172,32 @@ public class CycleWheelView extends ListView {
                 refreshItems();
             }
         });
+    }
+
+    /**
+     * 緩衝滑動ListView(依照版本使用不同的scroll method)
+     * @param distance 滑動距離
+     */
+    private void bufferScrollByAPIVersion(final int distance)
+    {
+        if( Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT )
+        {
+            scrollListBy( getDistance(distance) );
+
+            if( distance - getDistance(distance) != 0 )
+            {
+                postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        bufferScrollByAPIVersion( distance - getDistance(distance));
+                    }
+                }, 20);
+            }
+        }
+        else
+        {
+            smoothScrollBy( getDistance(distance), 50);
+        }
     }
 
     private int getDistance(float scrollDistance) {
