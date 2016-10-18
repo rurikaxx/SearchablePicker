@@ -7,6 +7,6 @@
 ### 由於CycleWheelView繼承ListView
 ### 因此只要改寫Adapter 
 ### Picker List就可以是任何Layout
-![Opps! Screen shot has missed](https://github.com/rurikaxx/SearchablePicker/blob/master/demo.gif)
+![Opps! Screen shot has missed](https://github.com/rurikaxx/SearchablePicker/blob/master/demo_1.gif)
 ###Developed by:
 David Luo(rurikaxx@gmail.com)
