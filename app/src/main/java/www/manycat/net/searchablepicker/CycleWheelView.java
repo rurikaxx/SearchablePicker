@@ -180,7 +180,7 @@ public class CycleWheelView extends ListView {
      */
     private void bufferScrollByAPIVersion(final int distance)
     {
-        if( Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT )
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
         {
             scrollListBy( getDistance(distance) );
 
